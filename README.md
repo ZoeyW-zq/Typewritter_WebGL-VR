@@ -1,45 +1,48 @@
-# Overview
-EZPZ Interaction Toolkit can get you building genuine, independently usable, interactive prototypes without needing to write code. All you need to do is drag and drop! Built on top of Unity 3D, it is a collection of scripts and prefabricated objects that you can mix and match to suit your purposes.  
+# Typewriter — WebGL & VR Interactive Prototype
 
-Guided Worksheet: 
-* https://bit.ly/4rVf964
+A Unity interactive prototype built for DDES9912. It places a working typewriter in a 3D environment: pressing its keys prints characters onto paper, while the carriage and paper move as part of the typing interaction. Animated typist characters work at other typewriters, and a walking character collects completed pages.
 
-Quick, 13 minute video guide below (12:44): 
-* https://youtu.be/GZrhy2qOsnE
+The project contains a desktop WebGL scene and a separate VR scene. The checked-in WebGL build is in [`Builds/`](Builds/).
 
-Unity, quick reminder videos (most less than 2 mins):
-* https://www.youtube.com/playlist?list=PLZP8wzCUfgsIQBKy3F4EwIlDgjX4_JypG
+## Experience
 
-Specific, EZPZ toolkit video guides:
-* https://www.youtube.com/playlist?list=PLZP8wzCUfgsKfgJDXuiHHAw-qjcEev1k-
+- Interact with the typewriter's keys to print characters on the inserted sheet. Shift and shift-lock states provide alternate characters.
+- Use the typewriter's paper controls to advance or replace the sheet.
+- Watch the typist characters type, remove finished pages, load new paper, and hand pages to the walking collector.
+- Place a finished page at the collection point to call the collector. The scene tracks the number of collected pages.
 
-# Licensing Info
-by Matt Cabanag https://www.linkedin.com/in/mattavc/
+## Run the project
 
-MIT License:
-Copyright 2022 - present, Matt Cabanag
+### In Unity
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+1. Open the repository folder with **Unity 6000.3.8f1** (the version recorded in [`ProjectVersion.txt`](ProjectSettings/ProjectVersion.txt)).
+2. Open [`Typewritter_Web_done.unity`](Assets/__My%20Project/Scene/Typewritter_Web_done.unity) and press **Play** for the desktop scene. This is the scene enabled in Build Settings.
+3. For the VR version, open [`Typewritter_VR.unity`](Assets/__My%20Project/Scene/Typewritter_VR.unity) instead. It uses Unity XR packages and requires a compatible, configured XR setup; it is not part of the current WebGL build.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+### Play the checked-in WebGL build
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Serve [`Builds/`](Builds/) from a local HTTP server, then open the server URL in a desktop browser. For example, from the repository root:
 
------
-Above copyright notice does not include the dependencies used below:
+```sh
+python -m http.server 8000 --directory Builds
+```
 
-3rd Party Assets Used:
-* https://assetstore.unity.com/packages/essentials/starter-assets-first-person-character-controller-196525
-* https://assetstore.unity.com/packages/tools/network/rest-client-for-unity-102501
-* https://www.clipartmax.com/download/m2i8H7G6d3K9N4N4_the-mouse-cursor-click-icon-shown-click-icon/
-* https://www.pexels.com/photo/brown-brick-wall-1227515/
-* https://www.pexels.com/photo/person-holding-white-and-black-frame-4065183/
-* https://unsplash.com/photos/2JONUbTfN38
-* https://freesound.org/people/sandyrb/sounds/105348/
-* https://assetstore.unity.com/packages/tools/network/rest-client-for-unity-102501
-* https://github.com/proyecto26/RestClient
-* https://freesound.org/people/kwahmah_02/sounds/275072/
+Open `http://localhost:8000/`. The WebGL files should be served together; opening `Builds/index.html` directly from the filesystem may fail to load the Unity data files.
 
-Google images for:
-Peppa Pig, Gundam, Elmo, Doraemon, Poo plush toy
+## Project layout
 
+| Path | Contents |
+| --- | --- |
+| [`Assets/__My Project/Scene/`](Assets/__My%20Project/Scene/) | Main WebGL and VR scenes, plus a controller hand test scene |
+| [`Assets/__My Project/Scripts/`](Assets/__My%20Project/Scripts/) | Typewriter, paper, NPC, and VR hand interaction scripts |
+| [`Assets/__My Project/Prefabs/`](Assets/__My%20Project/Prefabs/) | Typewriter, key, paper, and XR prefabs |
+| [`Builds/`](Builds/) | Exported WebGL player and build files |
+| [`Assets/EZPZ Interaction Toolkit/`](Assets/EZPZ%20Interaction%20Toolkit/) | Matt Cabanag's interaction toolkit used by this project |
+
+## Tools and credits
+
+Built with Unity 6, the Universal Render Pipeline, the Input System, XR Interaction Toolkit, XR Hands, OpenXR, Animation Rigging, and TextMesh Pro. Package versions are recorded in [`Packages/manifest.json`](Packages/manifest.json).
+
+This project uses **EZPZ Interaction Toolkit by Matt Cabanag**, provided as part of the course. In particular, project scripts use its interaction triggers and character navigation components. The toolkit is licensed under the **MIT License**; its copyright notice, license text, and third-party asset references are in [`Assets/README_EZPZ.txt`](Assets/README_EZPZ.txt). See the [toolkit guide](https://youtu.be/GZrhy2qOsnE) and [Matt Cabanag's profile](https://www.linkedin.com/in/mattavc/) for more information. The repository also includes [Proyecto26 RestClient](https://github.com/proyecto26/RestClient).
+
+The toolkit's MIT license applies to the toolkit, not automatically to every original or third-party asset in this repository.
